@@ -14,7 +14,7 @@
     "serve:prerender": "cd dist/browser && http-server",
     "serve:prerender:prod": "cd dist/browser && node ./bin/www",
     "serve:ssr": "node dist/server",
-    "postinstall": "npm run build:prerender && npm run serve:prerender:production",
+    "postinstall": "npm run build:prerender && npm run serve:prerender:prod",
     "deploy": "git push origin master && git push heroku master"
   },
   "private": true,
