@@ -6,6 +6,9 @@ import { enableProdMode } from '@angular/core';
 import * as express from 'express';
 import { join } from 'path';
 import { readFileSync } from 'fs';
+import * as cookieParser from 'cookie-parser';
+import * as bodyParser from "body-parser";
+import * as logger from 'morgan';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
@@ -13,7 +16,6 @@ enableProdMode();
 // Express server
 const app = express();
 
-const PORT = process.env.PORT || 4000;
 const DIST_FOLDER = join(process.cwd(), 'dist');
 
 // Our index.html we'll use as our template
@@ -38,6 +40,12 @@ app.engine('html', ngExpressEngine({
 app.set('view engine', 'html');
 app.set('views', join(DIST_FOLDER, 'browser'));
 
+app.use(logger('dev'));
+
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({extended: true}, {limit: '50mb'}));
+app.use(cookieParser());
+
 /* - Example Express Rest API endpoints -
   app.get('/api/**', (req, res) => { });
 */
@@ -52,8 +60,6 @@ app.get('*', (req, res) => {
   res.render('index', { req });
 });
 
-// Start up the Node server
-var port = process.env.PORT || 3000;
-app.listen(port, "0.0.0.0", function() {
-    console.log("Listening on Port 3000");
-});
+
+module.exports = app;
+
