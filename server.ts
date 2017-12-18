@@ -53,6 +53,6 @@ app.get('*', (req, res) => {
 });
 
 // Start up the Node server
-app.listen(PORT, () => {
+app.listen(process.env.PORT || 4000, () => {
   console.log(`Node Express server listening on http://localhost:${PORT}`);
 });
