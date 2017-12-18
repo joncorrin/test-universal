@@ -21,8 +21,13 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.ts$/, loader: 'ts-loader' }
+      { test: /\.ts$/, loader: 'ts-loader',use: ["remove-hashbag-loader"]}
     ]
+  },
+  resolveLoader: {
+      alias: {
+          "remove-hashbag-loader": path.join(__dirname, "./loaders/remove-hashbag-loader")
+      }
   },
   plugins: [
     new webpack.ContextReplacementPlugin(
