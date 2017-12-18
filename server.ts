@@ -52,7 +52,26 @@ app.get('*', (req, res) => {
   res.render('index', { req });
 });
 
+var port = normalizePort(process.env.PORT || '4000');
+app.set('port', port);
+
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
+
+    if (port >= 0) {
+        // port number
+        return port;
+    }
+
+    return false;
+}
+
 // Start up the Node server
-app.listen(process.env.PORT || 4000, () => {
+app.listen(port, () => {
   console.log(`Node Express server listening on http://localhost:${PORT}`);
 });
