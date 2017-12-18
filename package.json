@@ -13,7 +13,7 @@
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
     "serve:prerender": "cd dist/browser && http-server",
     "serve:ssr": "node dist/server",
-    "postinstall": "npm run build:prerender && npm run serve:prerender",
+    "postinstall": "npm run build:prerender && node ./bin/www",
     "deploy": "git push origin master && git push heroku master"
   },
   "private": true,
